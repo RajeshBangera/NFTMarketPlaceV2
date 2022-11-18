@@ -9,6 +9,7 @@ import avatar from "../assets/images/ava-01.png";
 import "../styles/create-item.css";
 import { useDispatch, useSelector } from "react-redux";
 import nftService from "../services/nftService";
+import { DropzoneArea } from "material-ui-dropzone";
 
 const item = {
   id: "01",
@@ -70,44 +71,48 @@ const Create = () => {
                 <form>
                   <div className="form__input">
                     <label htmlFor="">Upload File</label>
-                    <input
+                    {/* <input
                       type="file"
                       className="upload__input"
                       name="file"
                       onChange={changeHandler}
+                    /> */}
+                    <DropzoneArea
+                      className="upload_i nput"
+                      // sx={{
+                      //   bgcolor: "background.paper",
+                      //   boxShadow: 1,
+                      //   borderRadius: 2,
+                      //   p: 2,
+                      //   minWidth: 300,
+                      // }}
+                      acceptedFiles={["image/*"]}
+                      dropzoneText={"Drag and drop an image here or click"}
+                      onChange={(files) => console.log("Files:", files)}
                     />
                   </div>
 
                   <div className="form__input">
-                    <label htmlFor="">Price</label>
+                    <label htmlFor="">Amount</label>
                     <input
                       type="number"
-                      placeholder="Enter price for one item (ETH)"
-                      name="price"
+                      placeholder="Enter Amount to Lend"
+                      name="Amount"
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="form__input">
-                    <label htmlFor="">Minimum Bid</label>
+                    <label htmlFor="">Proposed Interest Rate</label>
                     <input
                       type="number"
-                      placeholder="Enter minimum bid"
+                      placeholder="Enter your Proposed Interest Rate"
                       name="minbid"
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className=" d-flex align-items-center gap-4">
-                    <div className="form__input w-50">
-                      <label htmlFor="">Starting Date</label>
-                      <input
-                        type="date"
-                        name="startdate"
-                        onChange={handleChange}
-                      />
-                    </div>
-
                     <div className="form__input w-50">
                       <label htmlFor="">Expiration Date</label>
                       <input
@@ -143,7 +148,7 @@ const Create = () => {
                     className="bid__btn d-flex align-items-center gap-1"
                     onClick={handleSubmit}
                   >
-                    Create
+                    Submit
                   </button>
                 </form>
               </div>
