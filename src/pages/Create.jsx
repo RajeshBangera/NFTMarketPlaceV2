@@ -78,14 +78,14 @@ const Create = () => {
                       onChange={changeHandler}
                     /> */}
                     <DropzoneArea
-                      className="upload_i nput"
+                      className="upload_input"
                       // sx={{
                       //   bgcolor: "background.paper",
                       //   boxShadow: 1,
                       //   borderRadius: 2,
                       //   p: 2,
                       //   minWidth: 300,
-                      // }}
+                      // }
                       acceptedFiles={["image/*"]}
                       dropzoneText={"Drag and drop an image here or click"}
                       onChange={(files) => console.log("Files:", files)}
