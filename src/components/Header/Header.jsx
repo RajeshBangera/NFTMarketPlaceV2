@@ -29,10 +29,10 @@ const Header = () => {
 
   const menuRef = useRef(null);
   const user = useSelector((state) => state.user);
-  let uid = "Guest";
+  let uName = "Guest";
 
   if (user.isUserLoggedIn) {
-    uid = user.uid;
+    uName = user.uName;
   }
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const Header = () => {
           <div className="nav__right d-flex align-items-center gap-5 ">
             <div></div>
             <div className="creator__info w-100 d-flex align-items-center justify-content-between">
-              <h6>Welcome, {uid}</h6>
+              <h6>Welcome, {uName}</h6>
             </div>
 
             <button className="btn d-flex gap-2 align-items-center">

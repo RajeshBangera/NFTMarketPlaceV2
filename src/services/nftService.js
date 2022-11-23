@@ -75,6 +75,25 @@ const nftService = {
           type: "LOGIN_USER",
           payload: response.data,
         });
+        const customHeaders = { ...header, uid: response.data.uid };
+        console.log("uid is");
+        console.log(customHeaders);
+        Communication.postMethodForm(
+          config.endPoints.fetchUserDetails,
+          formData,
+          {
+            headers: customHeaders,
+          }
+        )
+          .then((response) => {
+            dispatch({
+              type: "USER_DETAILS",
+              payload: response.data,
+            });
+          })
+          .catch((error) => {
+            console.log("Fetch user details error");
+          });
       })
       .catch((error) => {
         console.log("login error");

@@ -5,6 +5,7 @@ const config = {
     uploadNft: "user/addProposal",
     registerUser: "user/register",
     loginUser: "user/login",
+    fetchUserDetails: "user/read",
   },
 };
 export default config;
