@@ -20,6 +20,7 @@ const Market = () => {
   useEffect(() => {
     console.log("constructor called. Nft is loaded = :" + nft.isLoaded);
     console.log(nft.nftData);
+    console.log(user);
     if (!nft.isLoaded) {
       nftService.loadAllNft(dispatch, user.uid);
     }
@@ -100,7 +101,7 @@ const Market = () => {
             </Col>
 
             {nft.nftData?.map((item) => (
-              <Col lg="3" md="4" sm="6" className="mb-4" key={item.id}>
+              <Col lg="3" md="4" sm="6" className="mb-4" key={item.pid}>
                 <NftCard item={item} />
               </Col>
             ))}
