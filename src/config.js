@@ -1,8 +1,10 @@
 const config = {
-  baseUrl: "http://localhost:8081/",
+  baseUrl: "http://20.235.96.205:3005/",
   endPoints: {
-    getAllNfts: "getAllNfts",
-    uploadNft: "uploadNft",
+    getAllNfts: "user/showAllProposals",
+    uploadNft: "user/addProposal",
+    registerUser: "user/register",
+    loginUser: "user/login",
   },
 };
 export default config;

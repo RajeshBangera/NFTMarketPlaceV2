@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import nftService from "../../../services/nftService";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./modal.css";
 
 const Login = ({ setShowLoginModal }) => {
+  const initialFormData = Object.freeze({
+    email: "",
+    password: "",
+  });
+  const [formData, updateFormData] = useState(initialFormData);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Register event triggered");
+    nftService.loginUser(dispatch, formData);
+  };
+
   return (
     <div className="modal__wrapper">
       <div className="single__modal">
@@ -14,9 +35,10 @@ const Login = ({ setShowLoginModal }) => {
         <div className="input__item mb-4">
           <input
             type="text"
-            name="userid"
-            id="userid"
-            placeholder="Enter User ID"
+            name="email"
+            id="email"
+            placeholder="Email ID"
+            onChange={handleChange}
           />
         </div>
         <div className="input__item mb-4">
@@ -25,9 +47,12 @@ const Login = ({ setShowLoginModal }) => {
             name="password"
             id="password"
             placeholder="Enter Password"
+            onChange={handleChange}
           />
         </div>
-        <button className="place__bid-btn">Login</button>
+        <button className="place__bid-btn" onClick={handleSubmit}>
+          Login
+        </button>
       </div>
     </div>
   );

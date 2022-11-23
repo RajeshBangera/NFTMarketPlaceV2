@@ -3,6 +3,7 @@ import "./header.css";
 import { Container } from "reactstrap";
 
 import { NavLink, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const NAV__LINKS = [
   {
@@ -27,6 +28,12 @@ const Header = () => {
   const headerRef = useRef(null);
 
   const menuRef = useRef(null);
+  const user = useSelector((state) => state.user);
+  let uid = "Guest";
+
+  if (user.isUserLoggedIn) {
+    uid = user.uid;
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -78,10 +85,16 @@ const Header = () => {
           </div>
 
           <div className="nav__right d-flex align-items-center gap-5 ">
+            <div></div>
+            <div className="creator__info w-100 d-flex align-items-center justify-content-between">
+              <h6>Welcome, {uid}</h6>
+            </div>
+
             <button className="btn d-flex gap-2 align-items-center">
               <span>
                 <i class="ri-wallet-line"></i>
               </span>
+
               <Link to="/wallet">Connect Wallet</Link>
             </button>
 

@@ -6,10 +6,17 @@ import "./hero-section.css";
 import heroImg from "../../assets/images/hero.jpg";
 import Register from "./Modal/Register";
 import Login from "./Modal/Login";
+import { useDispatch, useSelector } from "react-redux";
 
 const HeroSection = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const user = useSelector((state) => state.user);
+
+  //Login modal should not open if login is successfull
+  if (user.isUserLoggedIn && showLoginModal) {
+    setShowLoginModal(false);
+  }
   return (
     <section className="hero__section">
       <Container>
@@ -40,12 +47,12 @@ const HeroSection = () => {
                   value="Login"
                 >
                   <i class="ri-ball-pen-line"></i>
-                  <Link to="#">Login</Link>
+                  <Link to="#">Login {console.log(user.isUserLoggedIn)}</Link>
                 </button>
                 {showRegisterModal && (
                   <Register setShowRegisterModal={setShowRegisterModal} />
                 )}
-                {showLoginModal && (
+                {showLoginModal && showLoginModal && (
                   <Login setShowLoginModal={setShowLoginModal} />
                 )}
               </div>

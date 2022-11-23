@@ -1,10 +1,21 @@
 import Communication from "./Communication";
 import config from "../config";
+import { useDispatch, useSelector } from "react-redux";
+
+const header = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Credentials": true,
+};
+
 const nftService = {
-  loadAllNft(dispatch) {
+  loadAllNft(dispatch, userId) {
     console.log("load all nft");
-    Communication.getMethod(config.endPoints.getAllNfts)
+    const customHeaders = { ...header, uid: userId };
+    Communication.getMethod(config.endPoints.getAllNfts, {
+      headers: customHeaders,
+    })
       .then((nfts) => {
+        console.log(nfts);
         dispatch({
           type: "LOAD_ALL_NFT",
           payload: nfts,
@@ -18,14 +29,55 @@ const nftService = {
       })
       .finally(() => {});
   },
-  uploadNft(dispatch, formData, selectedFile) {
+  uploadNft(dispatch, formData, selectedFile, userId) {
     console.log("upload nft");
-    Communication.postMethod(config.endPoints.uploadNft, formData, selectedFile)
-      .then(() => {
-        console.log("upload successfull");
+    const customHeaders = { ...header, uid: userId };
+    Communication.postMethodForm(config.endPoints.uploadNft, formData, {
+      headers: customHeaders,
+    })
+      .then((response) => {
+        console.log("proposal uploaded successfully");
+        dispatch({
+          type: "UPLOAD_PROPOSAL",
+          payload: response.data,
+        });
       })
       .catch((error) => {
-        console.log("upload error");
+        console.log("porposal  error");
+      });
+  },
+  registerUser(dispatch, formData) {
+    console.log("register user");
+    Communication.postMethodForm(
+      config.endPoints.registerUser,
+      formData,
+      header
+    )
+      .then((response) => {
+        console.log("registration successfull");
+        console.log(response.data);
+        dispatch({
+          type: "REGISTER_USER",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("registration error");
+      });
+  },
+  loginUser(dispatch, formData) {
+    console.log("login user");
+    console.log(formData);
+    Communication.postMethodForm(config.endPoints.loginUser, formData, header)
+      .then((response) => {
+        console.log("login successfull");
+        dispatch({
+          type: "LOGIN_USER",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("login error");
       });
   },
 };

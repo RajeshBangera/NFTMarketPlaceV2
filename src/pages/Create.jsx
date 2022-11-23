@@ -9,6 +9,7 @@ import avatar from "../assets/images/ava-01.png";
 import "../styles/create-item.css";
 import { useDispatch, useSelector } from "react-redux";
 import nftService from "../services/nftService";
+import { DropzoneArea } from "material-ui-dropzone";
 
 const item = {
   id: "01",
@@ -21,12 +22,12 @@ const item = {
 };
 
 const initialFormData = Object.freeze({
-  price: "",
-  midbid: "",
-  startdate: "",
-  expdate: "",
+  proposalAmount: "",
+  proposalIntrest: "",
+  proposalDue: "",
   title: "",
-  description: "",
+  proposalDescription: "",
+  colateral: "https://picsum.photos/200/300",
 });
 
 const Create = () => {
@@ -35,6 +36,9 @@ const Create = () => {
   const [isFilePicked, setIsFilePicked] = useState(false);
 
   const dispatch = useDispatch();
+  const nft = useSelector((state) => state.nft);
+  const user = useSelector((state) => state.user);
+
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -50,12 +54,12 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData, selectedFile);
-    nftService.uploadNft(dispatch, formData, selectedFile);
+    nftService.uploadNft(dispatch, formData, selectedFile, user.uid);
   };
 
   return (
     <>
-      <CommonSection title="Create Item" />
+      <CommonSection title="Create Proposal" />
 
       <section>
         <Container>
@@ -70,49 +74,56 @@ const Create = () => {
                 <form>
                   <div className="form__input">
                     <label htmlFor="">Upload File</label>
-                    <input
+                    {/* <input
                       type="file"
                       className="upload__input"
                       name="file"
                       onChange={changeHandler}
+                    /> */}
+                    <DropzoneArea
+                      className="upload_input"
+                      // sx={{
+                      //   bgcolor: "background.paper",
+                      //   boxShadow: 1,
+                      //   borderRadius: 2,
+                      //   p: 2,
+                      //   minWidth: 300,
+                      // }
+                      acceptedFiles={["image/*"]}
+                      dropzoneText={"Drag and drop an image here or click"}
+                      onChange={(files) => console.log("Files:", files)}
                     />
                   </div>
 
                   <div className="form__input">
-                    <label htmlFor="">Price</label>
+                    <label htmlFor="">Amount</label>
                     <input
                       type="number"
-                      placeholder="Enter price for one item (ETH)"
-                      name="price"
+                      placeholder="Enter Amount to Lend"
+                      name="proposalAmount"
+                      id="proposalAmount"
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className="form__input">
-                    <label htmlFor="">Minimum Bid</label>
+                    <label htmlFor="">Proposed Interest Rate</label>
                     <input
                       type="number"
-                      placeholder="Enter minimum bid"
-                      name="minbid"
+                      placeholder="Enter your Proposed Interest Rate"
+                      name="proposalIntrest"
+                      id="proposalIntrest"
                       onChange={handleChange}
                     />
                   </div>
 
                   <div className=" d-flex align-items-center gap-4">
                     <div className="form__input w-50">
-                      <label htmlFor="">Starting Date</label>
-                      <input
-                        type="date"
-                        name="startdate"
-                        onChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="form__input w-50">
                       <label htmlFor="">Expiration Date</label>
                       <input
                         type="date"
-                        name="expdate"
+                        name="proposalDue"
+                        id="proposalDue"
                         onChange={handleChange}
                       />
                     </div>
@@ -131,8 +142,8 @@ const Create = () => {
                   <div className="form__input">
                     <label htmlFor="">Description</label>
                     <textarea
-                      name="description"
-                      id=""
+                      name="proposalDescription"
+                      id="proposalDescription"
                       rows="7"
                       placeholder="Enter description"
                       className="w-100"
@@ -143,8 +154,13 @@ const Create = () => {
                     className="bid__btn d-flex align-items-center gap-1"
                     onClick={handleSubmit}
                   >
-                    Create
+                    Submit
                   </button>
+                  <div style={{ color: "white" }}>
+                    {nft.isProposalUploaded
+                      ? "Proposal uploade successfully !!!"
+                      : "Error uploading proposal !!!"}
+                  </div>
                 </form>
               </div>
             </Col>

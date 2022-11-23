@@ -15,12 +15,13 @@ const Market = () => {
   const dispatch = useDispatch();
 
   const nft = useSelector((state) => state.nft);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     console.log("constructor called. Nft is loaded = :" + nft.isLoaded);
     console.log(nft.nftData);
     if (!nft.isLoaded) {
-      nftService.loadAllNft(dispatch);
+      nftService.loadAllNft(dispatch, user.uid);
     }
   });
 

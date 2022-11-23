@@ -24,5 +24,20 @@ const Communication = {
         console.log("Upload error");
       });
   },
+  postMethodForm(endpoint, payload, header) {
+    console.log("payload here  : ");
+    console.log(payload);
+    console.log(header);
+    return axios
+      .post(config.baseUrl + endpoint, payload, header)
+      .then((result) => {
+        console.log(result);
+        console.log("Post Success");
+        return result;
+      })
+      .catch((err) => {
+        console.log("Upload error");
+      });
+  },
 };
 export default Communication;
