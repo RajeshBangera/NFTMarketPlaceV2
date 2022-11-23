@@ -6,35 +6,35 @@ import "./nft-card.css";
 import Modal from "../Modal/Modal";
 
 const NftCard = (props) => {
-  const { title, id, currbid, creatorimg, imgurl, creator } = props.item;
+  const { title, pid, proposalIntrest, colateral, imgurl, uid } = props.item;
 
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="single__nft__card">
       <div className="nft__img">
-        <img src={imgurl} alt="" className="w-100" />
+        <img src={colateral} alt="" className="w-100" />
       </div>
 
       <div className="nft__content">
         <h5 className="nft__title">
-          <Link to={`/market/${id}`}>{title}</Link>
+          <Link to={`/market/${pid}`}>{title}</Link>
         </h5>
 
         <div className="creator__info-wrapper d-flex gap-3">
           <div className="creator__img">
-            <img src={creatorimg} alt="" className="w-100" />
+            <img src={colateral} alt="" className="w-100" />
           </div>
 
           <div className="creator__info w-100 d-flex align-items-center justify-content-between">
             <div>
               <h6>Created By</h6>
-              <p>{creator}</p>
+              <p>{uid}</p>
             </div>
 
             <div>
               <h6>Interest rate</h6>
-              <p>{currbid} ETH</p>
+              <p>{proposalIntrest} ETH</p>
             </div>
           </div>
         </div>

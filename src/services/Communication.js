@@ -2,8 +2,8 @@ import config from "../config";
 import axios from "axios";
 
 const Communication = {
-  getMethod(endpoint) {
-    return axios.get(config.baseUrl + endpoint).then((response) => {
+  getMethod(endpoint, header) {
+    return axios.get(config.baseUrl + endpoint, header).then((response) => {
       return response.data;
     });
   },
