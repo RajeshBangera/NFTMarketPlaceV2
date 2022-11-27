@@ -6,6 +6,7 @@ const initialState = {
   uName: "",
   uAddress: "",
   uEmail: "",
+  nomuCoin: 0,
 };
 
 function userReducer(state = initialState, action) {

@@ -16,12 +16,15 @@ const Market = () => {
 
   const nft = useSelector((state) => state.nft);
   const user = useSelector((state) => state.user);
+  const borrower = useSelector((state) => state.borrower);
 
   useEffect(() => {
     console.log("constructor called. Nft is loaded = :" + nft.isLoaded);
-    console.log(nft.nftData);
     console.log(user);
+    console.log(borrower);
     if (!nft.isLoaded) {
+      console.log(nft.nftData);
+      console.log(user);
       nftService.loadAllNft(dispatch, user.uid);
     }
   });
@@ -99,12 +102,18 @@ const Market = () => {
                 </div>
               </div>
             </Col>
-
-            {nft.nftData?.map((item) => (
-              <Col lg="3" md="4" sm="6" className="mb-4" key={item.pid}>
-                <NftCard item={item} />
-              </Col>
-            ))}
+            {console.log(typeof borrower)}
+            {console.log(borrower)}
+            {nft.nftData?.map((nitem) =>
+              borrower.map(
+                (bitem) =>
+                  nitem.uid === bitem.uid && (
+                    <Col lg="3" md="4" sm="6" className="mb-4" key={nitem.pid}>
+                      <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
+                    </Col>
+                  )
+              )
+            )}
           </Row>
         </Container>
       </section>

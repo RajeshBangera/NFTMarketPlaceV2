@@ -28,6 +28,10 @@ const initialFormData = Object.freeze({
   title: "",
   proposalDescription: "",
   colateral: "https://picsum.photos/200/300",
+  finalIntrest: "",
+  grantTime: "",
+  status: 0,
+  transaction: [],
 });
 
 const Create = () => {
@@ -64,10 +68,10 @@ const Create = () => {
       <section>
         <Container>
           <Row>
-            <Col lg="3" md="4" sm="6">
+            {/*<Col lg="3" md="4" sm="6">
               <h5 className="mb-4 text-light">Preview Item</h5>
-              <NftCard item={item} />
-            </Col>
+              <NftCard item={item} bitem={item} />
+  </Col>*/}
 
             <Col lg="9" md="8" sm="6">
               <div className="create__item">

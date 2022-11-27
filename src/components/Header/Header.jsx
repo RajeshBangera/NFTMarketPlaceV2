@@ -95,7 +95,7 @@ const Header = () => {
                 <i class="ri-wallet-line"></i>
               </span>
 
-              <Link to="/wallet">Connect Wallet</Link>
+              <Link to="/wallet">NomuCoins : {user.nomuCoin}</Link>
             </button>
 
             <span className="mobile__menu">

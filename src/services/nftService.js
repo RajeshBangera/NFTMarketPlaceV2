@@ -17,8 +17,22 @@ const nftService = {
       .then((nfts) => {
         console.log(nfts);
         dispatch({
+          type: "CLEAR_ALL_BORROWER",
+        });
+        dispatch({
           type: "LOAD_ALL_NFT",
           payload: nfts,
+        });
+        const uniqueUids = [];
+        nfts.map((item) => {
+          console.log("Individaul items");
+          if (uniqueUids.indexOf(item.uid) === -1) {
+            uniqueUids.push(item.uid);
+          }
+        });
+        uniqueUids.map((item) => {
+          console.log("Fetching details for  : " + item);
+          nftService.loadAllBorrower(dispatch, item);
         });
       })
       .catch(() => {
@@ -97,6 +111,43 @@ const nftService = {
       })
       .catch((error) => {
         console.log("login error");
+      });
+  },
+  loadAllBorrower(dispatch, userId) {
+    console.log("nftservice: getBorrower");
+    console.log(userId);
+    const customHeaders = { ...header, uid: userId };
+    console.log(customHeaders);
+    Communication.postMethodForm(
+      config.endPoints.fetchUserDetails,
+      {},
+      {
+        headers: customHeaders,
+      }
+    )
+      .then((response) => {
+        console.log("getBorrower : Getting response");
+        dispatch({
+          type: "LOAD_ALL_BORROWER",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("getBorrower : error occured");
+      });
+  },
+  buyNft(dispatch, formData, userId) {
+    console.log("buyNft reducer");
+    const customHeaders = { ...header, uid: userId };
+    Communication.postMethodForm(config.endPoints.buyNft, formData, {
+      headers: customHeaders,
+    })
+      .then((response) => {
+        console.log(response);
+        console.log("buy nft success");
+      })
+      .catch((error) => {
+        console.log("buy nft error");
       });
   },
 };

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./modal.css";
 
-const Modal = ({ setShowModal }) => {
+const Modal = ({ setShowModal, pid }) => {
   return (
     <div className="modal__wrapper">
       <div className="single__modal">

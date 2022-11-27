@@ -6,6 +6,7 @@ const config = {
     registerUser: "user/register",
     loginUser: "user/login",
     fetchUserDetails: "user/read",
+    buyNft: "user/buyShare",
   },
 };
 export default config;
