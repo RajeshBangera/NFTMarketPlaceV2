@@ -22,6 +22,10 @@ const NAV__LINKS = [
     display: "NFTs",
     url: "/contact",
   },
+  {
+    display: "Admin",
+    url: "/Admin"
+  }
 ];
 
 const Header = () => {
