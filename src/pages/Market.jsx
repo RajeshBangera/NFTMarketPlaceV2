@@ -104,16 +104,24 @@ const Market = () => {
             </Col>
             {console.log(typeof borrower)}
             {console.log(borrower)}
-            {nft.nftData?.map((nitem) =>
-              borrower.map(
-                (bitem) =>
-                  nitem.uid === bitem.uid && (
-                    <Col lg="3" md="4" sm="6" className="mb-4" key={nitem.pid}>
-                      <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
-                    </Col>
-                  )
-              )
-            )}
+            {nft.nftData
+              .filter((item) => item.status === 1)
+              .map((nitem) =>
+                borrower.map(
+                  (bitem) =>
+                    nitem.uid === bitem.uid && (
+                      <Col
+                        lg="3"
+                        md="4"
+                        sm="6"
+                        className="mb-4"
+                        key={nitem.pid}
+                      >
+                        <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
+                      </Col>
+                    )
+                )
+              )}
           </Row>
         </Container>
       </section>

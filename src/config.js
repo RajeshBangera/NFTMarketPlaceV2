@@ -7,6 +7,7 @@ const config = {
     loginUser: "user/login",
     fetchUserDetails: "user/read",
     buyNft: "user/buyShare",
+    approveProposal: "user/grantLoan",
   },
 };
 export default config;

@@ -11,7 +11,8 @@ import { SubscriptionsOutlined } from "@material-ui/icons";
 const NftCard = (props) => {
   console.log("NFTCard here");
   console.log(props);
-  const { title, pid, proposalIntrest, colateral, imgurl, uid } = props.item;
+  const { title, pid, proposalIntrest, colateral, imgurl, uid, status } =
+    props.item;
   const { name } = props.bitem;
 
   const [showModal, setShowModal] = useState(false);

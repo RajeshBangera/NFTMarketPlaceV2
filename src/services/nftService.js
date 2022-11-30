@@ -170,5 +170,22 @@ const nftService = {
         console.log("buy nft error");
       });
   },
+  approveProposal(dispatch, pid, uid) {
+    const customHeaders = { ...header, aid: "admin1" };
+    Communication.postMethodForm(
+      config.endPoints.approveProposal,
+      { pid: pid },
+      {
+        headers: customHeaders,
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        this.loadAllNft(dispatch, uid);
+      })
+      .catch((error) => {
+        console.log("approve proposal success");
+      });
+  },
 };
 export default nftService;

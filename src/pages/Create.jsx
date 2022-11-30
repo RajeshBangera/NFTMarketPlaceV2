@@ -163,7 +163,7 @@ const Create = () => {
                   <div style={{ color: "white" }}>
                     {nft.isProposalUploaded
                       ? "Proposal uploade successfully !!!"
-                      : "Error uploading proposal !!!"}
+                      : ""}
                   </div>
                 </form>
               </div>

@@ -42,16 +42,24 @@ const Admin = () => {
 
             <h3 style={{ color: "white" }}>All Submitted Proposals</h3>
 
-            {nft.nftData?.map((nitem) =>
-              borrower.map(
-                (bitem) =>
-                  nitem.uid === bitem.uid && (
-                    <Col lg="3" md="4" sm="6" className="mb-4">
-                      <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
-                    </Col>
-                  )
-              )
-            )}
+            {nft.nftData
+              .filter((item) => item.status === 0)
+              .map((nitem) =>
+                borrower.map(
+                  (bitem) =>
+                    nitem.uid === bitem.uid && (
+                      <Col
+                        lg="3"
+                        md="4"
+                        sm="6"
+                        className="mb-4"
+                        key={nitem.pid}
+                      >
+                        <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
+                      </Col>
+                    )
+                )
+              )}
           </Row>
           <Row>
             {/* {nft.nftData?.map((item) => (

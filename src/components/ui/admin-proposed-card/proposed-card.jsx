@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
 import "./proposed-card.css";
 
 import Modal from "../Modal/Modal";
+import nftService from "../../../services/nftService";
 
 const NftCard = (props) => {
-  const { title, pid, proposalIntrest, colateral, imgurl, uid } = props.item;
+  const { title, pid, proposalIntrest, colateral, imgurl } = props.item;
   const { name } = props.bitem;
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(false);
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Approve NFT event triggered");
+    console.log(e.target.id);
+    if (e.target.name === "approve") {
+      nftService.approveProposal(dispatch, pid, user.uid);
+    }
+  };
   return (
     <div className="single__nft__card">
       <div className="nft__img">
@@ -35,7 +45,7 @@ const NftCard = (props) => {
 
             <div>
               <h6>Interest rate</h6>
-              <p>{proposalIntrest} ETH</p>
+              <p>{proposalIntrest} NomuCoins</p>
             </div>
           </div>
         </div>
@@ -43,7 +53,9 @@ const NftCard = (props) => {
         <div className=" mt-3 d-flex align-items-center justify-content-between">
           <button
             className="bid__btn d-flex align-items-center gap-1"
-            onClick={() => setShowModal(true)}
+            name="approve"
+            id={pid}
+            onClick={handleSubmit}
           >
             <i class="ri-shopping-bag-line"></i> Approve
           </button>
