@@ -144,7 +144,27 @@ const nftService = {
     })
       .then((response) => {
         console.log(response);
+        dispatch({
+          type: "BUY_NFT",
+          payload: response.data,
+        });
         console.log("buy nft success");
+        Communication.postMethodForm(
+          config.endPoints.fetchUserDetails,
+          formData,
+          {
+            headers: customHeaders,
+          }
+        )
+          .then((response) => {
+            dispatch({
+              type: "USER_DETAILS",
+              payload: response.data,
+            });
+          })
+          .catch((error) => {
+            console.log("Fetch user details error");
+          });
       })
       .catch((error) => {
         console.log("buy nft error");

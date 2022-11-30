@@ -1,6 +1,7 @@
 const initialState = {
   registerMsg: "",
   registerStatus: "",
+  buyNftMsg: "",
   isUserLoggedIn: false,
   uid: "",
   uName: "",
@@ -27,6 +28,7 @@ function userReducer(state = initialState, action) {
     case "LOGIN_USER":
       console.log("login user reducer");
       if (action.payload.status === "success") {
+        console.log(action.payload);
         return {
           ...state,
           isUserLoggedIn: true,
@@ -37,15 +39,30 @@ function userReducer(state = initialState, action) {
       }
     case "USER_DETAILS":
       console.log("user details reducer");
+      console.log(action.payload);
       if (action.payload.status === "success") {
         return {
           ...state,
           uName: action.payload.payload.name,
           uAddress: action.payload.payload.address,
           uEmail: action.payload.payload.email,
+          nomuCoin: action.payload.payload.nomuCoin,
         };
       } else {
         return initialState;
+      }
+    case "BUY_NFT":
+      console.log("buy nft reducer");
+      if (action.payload.status === "success") {
+        return {
+          ...state,
+          buyNftMsg: "Bought NFT successfully !!!",
+        };
+      } else {
+        return {
+          ...state,
+          buyNftMsg: "Error buying NFT successfully !!!",
+        };
       }
     case "ERROR":
       return { ...state };

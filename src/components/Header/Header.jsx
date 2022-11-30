@@ -24,8 +24,8 @@ const NAV__LINKS = [
   },
   {
     display: "Admin",
-    url: "/Admin"
-  }
+    url: "/Admin",
+  },
 ];
 
 const Header = () => {
@@ -37,6 +37,8 @@ const Header = () => {
 
   if (user.isUserLoggedIn) {
     uName = user.uName;
+    console.log("user");
+    console.log(user);
   }
 
   useEffect(() => {

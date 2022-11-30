@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal";
 
 const NftCard = (props) => {
   const { title, pid, proposalIntrest, colateral, imgurl, uid } = props.item;
+  const { name } = props.bitem;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -29,7 +30,7 @@ const NftCard = (props) => {
           <div className="creator__info w-100 d-flex align-items-center justify-content-between">
             <div>
               <h6>Created By</h6>
-              <p>{uid}</p>
+              <p>{name}</p>
             </div>
 
             <div>
@@ -44,7 +45,7 @@ const NftCard = (props) => {
             className="bid__btn d-flex align-items-center gap-1"
             onClick={() => setShowModal(true)}
           >
-            <i class="ri-shopping-bag-line"></i> Accept
+            <i class="ri-shopping-bag-line"></i> Approve
           </button>
         </div>
 
@@ -53,7 +54,7 @@ const NftCard = (props) => {
             className="bid__btn d-flex align-items-center gap-1"
             onClick={() => setShowModal(false)}
           >
-            <i class="ri-shopping-bag-line"></i> Cancel
+            <i class="ri-shopping-bag-line"></i> Reject
           </button>
 
           <span className="history__link">

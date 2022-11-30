@@ -1,3 +1,4 @@
+import { color } from "@mui/system";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import nftService from "../../../services/nftService";
@@ -71,6 +72,7 @@ const BuyNFT = ({ setShowModal, item, bitem }) => {
         <button className="place__bid-btn" onClick={handleSubmit}>
           Buy NFT
         </button>
+        <div style={{ color: "white" }}>{user.buyNftMsg}</div>
       </div>
     </div>
   );

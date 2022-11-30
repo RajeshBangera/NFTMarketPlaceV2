@@ -7,9 +7,26 @@ import NftCard from "../components/ui/admin-proposed-card/proposed-card";
 import { Container, Row, Col } from "reactstrap";
 import { NFT__DATA } from "../assets/data/data.js";
 import "../styles/market.css";
+import { useDispatch, useSelector } from "react-redux";
 import nftService from "../services/nftService";
 
-const admin = () => {
+const Admin = () => {
+  const dispatch = useDispatch();
+  const nft = useSelector((state) => state.nft);
+  const user = useSelector((state) => state.user);
+  const borrower = useSelector((state) => state.borrower);
+
+  useEffect(() => {
+    console.log("constructor called. Nft is loaded = :" + nft.isLoaded);
+    console.log(user);
+    console.log(borrower);
+    if (!nft.isLoaded) {
+      console.log(nft.nftData);
+      console.log(user);
+      nftService.loadAllNft(dispatch, user.uid);
+    }
+  });
+
   return (
     <>
       <CommonSection title={"Submitted and Passed Proposals"} />
@@ -23,12 +40,18 @@ const admin = () => {
               </Col>
             ))} */}
 
-            <h3>All Submitted Proposals</h3>
-            {NFT__DATA.slice(0, 4).map((item) => (
-              <Col lg="3" md="4" sm="6" className="mb-4">
-                <NftCard key={item.id} item={item} />
-              </Col>
-            ))}
+            <h3 style={{ color: "white" }}>All Submitted Proposals</h3>
+
+            {nft.nftData?.map((nitem) =>
+              borrower.map(
+                (bitem) =>
+                  nitem.uid === bitem.uid && (
+                    <Col lg="3" md="4" sm="6" className="mb-4">
+                      <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
+                    </Col>
+                  )
+              )
+            )}
           </Row>
           <Row>
             {/* {nft.nftData?.map((item) => (
@@ -36,13 +59,6 @@ const admin = () => {
                 <NftCard item={item} />
               </Col>
             ))} */}
-
-            <h3>All onGoing Loans</h3>
-            {NFT__DATA.slice(0, 8).map((item) => (
-              <Col lg="3" md="4" sm="6" className="mb-4">
-                <NftCard key={item.id} item={item} />
-              </Col>
-            ))}
           </Row>
         </Container>
       </section>
@@ -50,4 +66,4 @@ const admin = () => {
   );
 };
 
-export default admin;
+export default Admin;
