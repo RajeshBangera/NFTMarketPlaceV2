@@ -40,7 +40,7 @@ const NftCard = (props) => {
 
             <div>
               <h6>Interest rate</h6>
-              <p>{proposalIntrest} NomuCoins</p>
+              <p>{proposalIntrest} </p>
             </div>
           </div>
         </div>
