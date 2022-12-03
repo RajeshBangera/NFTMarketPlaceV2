@@ -51,12 +51,12 @@ const BuyNFT = ({ setShowModal, item, bitem }) => {
         </div>
         <div className=" d-flex align-items-center justify-content-between">
           <p>Proposal Amt</p>
-          <span className="money">{proposalAmount} NomuCoins</span>
+          <span className="money">{proposalAmount}</span>
         </div>
 
         <div className=" d-flex align-items-center justify-content-between">
           <p>Service Fee</p>
-          <span className="money">1 NomuCoins</span>
+          <span className="money">1</span>
         </div>
 
         <div className="input__item mb-3">
