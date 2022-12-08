@@ -96,7 +96,10 @@ const Header = () => {
               <h6>Welcome, {uName}</h6>
             </div>
 
-            <button className="btn d-flex gap-2 align-items-center">
+            <button
+              className="btn d-flex gap-2 align-items-center"
+              style={{ color: "white" }}
+            >
               <span>
                 <i class="ri-wallet-line"></i>
               </span>

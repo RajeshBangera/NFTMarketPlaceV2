@@ -1,74 +1,88 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import CommonSection from "../components/ui/Common-section/CommonSection";
+
+import NftCard from "../components/ui/user-nft-card/UserNFTcard";
+
 import { Container, Row, Col } from "reactstrap";
+import { NFT__DATA } from "../assets/data/data.js";
+import "../styles/market.css";
+import { useDispatch, useSelector } from "react-redux";
+import nftService from "../services/nftService";
 
-const Contact = () => {
-  const nameRef = useRef("");
-  const emailRef = useRef("");
-  const subjectRef = useRef("");
-  const messageRef = useRef("");
+const Admin = () => {
+  const dispatch = useDispatch();
+  const nft = useSelector((state) => state.nft);
+  const user = useSelector((state) => state.user);
+  const borrower = useSelector((state) => state.borrower);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  useEffect(() => {
+    console.log("constructor called. Nft is loaded = :" + nft.isLoaded);
+    console.log(user);
+    console.log(borrower);
+    if (!nft.isLoaded) {
+      console.log(nft.nftData);
+      console.log(user);
+      nftService.loadAllNft(dispatch, user.uid);
+    }
+  });
 
   return (
     <>
-      <CommonSection title="Contact" />
+      <CommonSection title={"Holdings And Proposed Loan"} />
+
       <section>
         <Container>
           <Row>
-            <Col lg="6" md="6" className="m-auto text-center">
-              <h2>Drop a Message</h2>
-              <p>
-                
-              </p>
-              <div className="contact mt-4">
-                <form onSubmit={handleSubmit}>
-                  <div className="form__input">
-                    <input
-                      type="text"
-                      placeholder="Enter your name"
-                      ref={nameRef}
-                    />
-                  </div>
-                  <div className="form__input">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      ref={emailRef}
-                    />
-                  </div>
-                  <div className="form__input">
-                    <input
-                      type="text"
-                      placeholder="Enter subject"
-                      ref={subjectRef}
-                    />
-                  </div>
-                  <div className="form__input">
-                    <textarea
-                      rows="7"
-                      placeholder="Write message"
-                      ref={messageRef}
-                    ></textarea>
-                  </div>
+            {/* {nft.nftData?.map((item) => (
+              <Col lg="3" md="4" sm="6" className="mb-4" key={item.pid}>
+                <NftCard item={item} />
+              </Col>
+            ))} */}
 
-                  <button
-                    className="send__btn"
-                    style={{
-                      border: "none",
-                      padding: "7px 25px",
-                      borderRadius: "5px",
-                      marginTop: "20px",
-                    }}
-                  >
-                    Send a Message
-                  </button>
-                </form>
-              </div>
-            </Col>
+            <h3 style={{ color: "white" }}>Holdings</h3>
+
+            {nft.nftData
+              .filter((item) => item.status === 0)
+              .map((nitem) =>
+                borrower.map(
+                  (bitem) =>
+                    nitem.uid === bitem.uid && (
+                      <Col
+                        lg="3"
+                        md="4"
+                        sm="6"
+                        className="mb-4"
+                        key={nitem.pid}
+                      >
+                        <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
+                      </Col>
+                    )
+                )
+              )}
+          </Row>
+          <br></br>
+          <Row>
+            <h3 style={{ color: "white" }}>My Proposed Loans</h3>
+
+            {nft.nftData
+              .filter((item) => item.status === 0)
+              .map((nitem) =>
+                borrower.map(
+                  (bitem) =>
+                    nitem.uid === bitem.uid && (
+                      <Col
+                        lg="3"
+                        md="4"
+                        sm="6"
+                        className="mb-4"
+                        key={nitem.pid}
+                      >
+                        <NftCard key={nitem.pid} item={nitem} bitem={bitem} />
+                      </Col>
+                    )
+                )
+              )}
           </Row>
         </Container>
       </section>
@@ -76,4 +90,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Admin;
