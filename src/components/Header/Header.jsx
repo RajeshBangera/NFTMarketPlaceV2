@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./header.css";
 import { Container } from "reactstrap";
 
+import BuyCoins from "../ui/Modal/BuyCoins";
 import { NavLink, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,7 +29,7 @@ const NAV__LINKS = [
   },
 ];
 
-const Header = () => {
+const Header = (props) => {
   const headerRef = useRef(null);
 
   const menuRef = useRef(null);
@@ -59,7 +60,7 @@ const Header = () => {
   }, []);
 
   const toggleMenu = () => menuRef.current.classList.toggle("active__menu");
-
+  const [showModal, setShowModal] = useState(false);
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -99,11 +100,13 @@ const Header = () => {
             <button
               className="btn d-flex gap-2 align-items-center"
               style={{ color: "white" }}
+              onClick={() => setShowModal(true)}
             >
               <span>
                 <i class="ri-wallet-line"></i>
               </span>
               Coins:0
+              {showModal && <BuyCoins setShowModal={setShowModal} />}
             </button>
 
             <span className="mobile__menu">

@@ -43,7 +43,7 @@ const Admin = () => {
             <h3 style={{ color: "white" }}>Holdings</h3>
 
             {nft.nftData
-              .filter((item) => item.status === 0)
+              .filter((item) => item.status === 2)
               .map((nitem) =>
                 borrower.map(
                   (bitem) =>
@@ -66,7 +66,7 @@ const Admin = () => {
             <h3 style={{ color: "white" }}>My Proposed Loans</h3>
 
             {nft.nftData
-              .filter((item) => item.status === 0)
+              .filter((item) => item.status === 1)
               .map((nitem) =>
                 borrower.map(
                   (bitem) =>
