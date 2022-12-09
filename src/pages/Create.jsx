@@ -27,7 +27,7 @@ const initialFormData = Object.freeze({
   proposalDue: "",
   title: "",
   proposalDescription: "",
-  colateral: "https://picsum.photos/200/300",
+  colateral: "https://i.ibb.co/SrY7v5D/legal-doc.jpg",
   finalIntrest: "",
   grantTime: "",
   status: 0,

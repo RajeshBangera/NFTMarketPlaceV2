@@ -19,7 +19,7 @@ const NAV__LINKS = [
     url: "/create",
   },
   {
-    display: "My NFTs",
+    display: "NFTs",
     url: "/contact",
   },
   {
@@ -100,7 +100,8 @@ const Header = () => {
               <span>
                 <i class="ri-wallet-line"></i>
               </span>
-              Coins:0
+
+              <Link to="/wallet">NomuCoins : {user.nomuCoin}</Link>
             </button>
 
             <span className="mobile__menu">
